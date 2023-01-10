@@ -56,8 +56,10 @@ const TemperatureInput = ({ value, scale, onChange }) => {
 
 // Main component
 export default App = () => {
-  // Common state is lifted here because this component is the closest parent of TemperatureInput components
-  const [temperature, setTemperature] = useState("");
+  // Common state is lifted here because this component is the closest parent of TemperatureInput components.
+  // We store only the most recently changed input with its scale.
+  // Temperature is stored as a string to interact easily with TextInput components.
+  const [temperature, setTemperature] = useState("0");
   const [scale, setScale] = useState("c");
 
   // Compute temperatures in both scales
