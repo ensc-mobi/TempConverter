@@ -1,58 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
-
-// Scale names used for display
-const scaleNames = { c: "Celsius", f: "Fahrenheit" };
-
-// Celsius/Fahrenheit conversion functions
-function toCelsius(fahrenheit) {
-  return ((fahrenheit - 32) * 5) / 9;
-}
-function toFahrenheit(celsius) {
-  return (celsius * 9) / 5 + 32;
-}
-
-// Convert a temperature using a given conversion function
-function tryConvert(temperature, convert) {
-  const input = parseFloat(temperature);
-  if (Number.isNaN(input)) {
-    return "";
-  }
-  // Call the conversion function on input
-  const output = convert(input);
-  // Keep the output rounded to the third decimal place:
-  const rounded = Math.round(output * 1000) / 1000;
-  return rounded.toString();
-}
-
-// Component displaying if the water would boil or not, depending on the temperature
-// We choose the Celsius scale for easier comparison with the boiling temperature
-const BoilingResult = ({ tempCelsius }) => {
-  let message = "";
-  if (!Number.isNaN(tempCelsius)) {
-    message =
-      tempCelsius >= 100 ? "The water would boil" : "The water would not boil";
-  }
-  return <Text style={styles.text}>{message}</Text>;
-};
-
-// Component for displaying and inputting a temperature in a specific scale
-const TemperatureInput = ({ value, scale, onChange }) => {
-  // Accessing scaleNames properties through bracket notation
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors
-  const placeholder = `Enter temperature in ${scaleNames[scale]}`;
-  return (
-    <TextInput
-      style={styles.text}
-      placeholder={placeholder}
-      onChangeText={(text) => {
-        // Call callback passed as component prop when input text changes
-        onChange(text);
-      }}
-      value={value}
-    />
-  );
-};
+import { View } from "react-native";
+import BoilingResult from "./components/BoilingResult";
+import TemperatureInput from "./components/TemperatureInput";
+import { toCelsius, toFahrenheit, tryConvert } from "./utils/temperatureUtils";
+import styles from "./theme/styles";
 
 // Main component
 export default App = () => {
@@ -92,16 +43,3 @@ export default App = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    fontSize: 22,
-    paddingBottom: 10,
-  },
-});
