@@ -4,7 +4,7 @@ import styles from "../theme/styles";
 
 // Component displaying if the water would boil or not, depending on the temperature
 // We choose the Celsius scale for easier comparison with the boiling temperature
-export default BoilingResult = ({ tempCelsius }) => {
+const BoilingResult = ({ tempCelsius }) => {
   let message = "";
   if (!Number.isNaN(tempCelsius)) {
     message =
@@ -12,3 +12,5 @@ export default BoilingResult = ({ tempCelsius }) => {
   }
   return <Text style={styles.text}>{message}</Text>;
 };
+
+export default BoilingResult;

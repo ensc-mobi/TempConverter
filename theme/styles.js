@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 // Common application styles
-export default styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
@@ -12,3 +12,5 @@ export default styles = StyleSheet.create({
     paddingBottom: 10,
   },
 });
+
+export default styles;
